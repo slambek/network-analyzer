@@ -21,14 +21,6 @@ The project was developed as part of MSc Computer Science research focused on AI
 - Explainable classification pipeline
 - SOC-oriented deployment architecture
 
-## Research Objectives
-
-- Detect anomalous network activity using AI-based models
-- Combine sequential learning with statistical classification
-- Reduce false positives in intrusion detection
-- Analyze packet-level network traffic in real time
-- Explore hybrid ML/DL architectures for cybersecurity applications
-
 ## Features
 
 - Hybrid detection pipeline using LSTM and Random Forest models
@@ -104,6 +96,24 @@ Extracted features included:
 | Precision | 93.7% |
 | Recall | 93.1% |
 | F1 Score | 93.4% |
+
+## Dashboard Preview
+
+### Traffic Analysis Dashboard
+
+![Dashboard](./docs/screenshots/dashboard-overview.png)
+
+### Detection Results
+
+![Results](./docs/screenshots/analysis-results.png)
+
+### Model Evaluation
+
+![Metrics](./docs/screenshots/metrics-comparison.png)
+
+### Confusion Matrix
+
+![Confusion Matrix](./docs/screenshots/confusion-matrix.png)
 
 ## Documentation
 

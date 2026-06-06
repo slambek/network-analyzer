@@ -1,5 +1,10 @@
 # Network Analyzer
 
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-LSTM-orange)
+![Scikit-learn](https://img.shields.io/badge/ScikitLearn-RandomForest-red)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 Real-time network intrusion detection system combining LSTM-based sequence analysis with Random Forest classification for anomaly detection in network traffic.
 
 ## Overview
@@ -7,6 +12,14 @@ Real-time network intrusion detection system combining LSTM-based sequence analy
 This project explores the use of hybrid machine learning and deep learning architectures for cybersecurity and network anomaly detection. The system analyzes packet flows from PCAP traffic data and identifies suspicious or malicious network behavior in real time.
 
 The project was developed as part of MSc Computer Science research focused on AI-driven intrusion detection systems.
+
+## Design Goals
+
+- Real-time intrusion detection
+- Reduced false positive rate
+- Temporal traffic analysis
+- Explainable classification pipeline
+- SOC-oriented deployment architecture
 
 ## Research Objectives
 
@@ -72,7 +85,7 @@ Feature Extraction
 
 ## Dataset
 
-The system was trained and evaluated using labeled network traffic datasets converted from PCAP captures into structured flow-based features.
+The system was trained and evaluated using the UNSW-NB15 dataset, which contains modern network traffic patterns and multiple categories of malicious activity including DoS, Exploits, Reconnaissance, Shellcode, and Worms attacks.
 
 Extracted features included:
 - Packet length
@@ -87,10 +100,10 @@ Extracted features included:
 
 | Metric | Score |
 |---|---|
-| Accuracy | 96.2% |
-| Precision | 94.8% |
-| Recall | 95.1% |
-| F1 Score | 95.0% |
+| Accuracy | 99.20% |
+| Precision | 93.7% |
+| Recall | 93.1% |
+| F1 Score | 93.4% |
 
 ## Project Structure
 

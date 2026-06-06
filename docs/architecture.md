@@ -2,7 +2,7 @@
 
 ## Detection Pipeline
 
-```text
+```text id="ww1qhi"
 Network Traffic
        ↓
 Packet Capture & Parsing

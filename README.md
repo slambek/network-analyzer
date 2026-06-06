@@ -9,172 +9,59 @@ Real-time network intrusion detection system combining LSTM-based sequence analy
 
 ## Overview
 
-This project explores the use of hybrid machine learning and deep learning architectures for cybersecurity and network anomaly detection. The system analyzes packet flows from PCAP traffic data and identifies suspicious or malicious network behavior in real time.
+Hybrid AI-based intrusion detection system designed for real-time network traffic analysis and anomaly detection using LSTM and Random Forest models.
 
-The project was developed as part of MSc Computer Science research focused on AI-driven intrusion detection systems.
-
-## Design Goals
-
-- Real-time intrusion detection
-- Reduced false positive rate
-- Temporal traffic analysis
-- Explainable classification pipeline
-- SOC-oriented deployment architecture
+Developed as part of MSc Computer Science research focused on AI-driven cybersecurity systems.
 
 ## Features
 
-- Hybrid detection pipeline using LSTM and Random Forest models
-- Real-time traffic monitoring dashboard built with Streamlit
-- Packet analysis and feature extraction using Scapy
-- Network traffic simulation for testing and evaluation
-- Ensemble-based anomaly scoring system
-- Alerting and attack logging modules
-- PCAP-based traffic processing pipeline
-
-## Detection Pipeline
-
-```text
-Network Traffic
-       ↓
-Packet Capture & Parsing
-       ↓
-Feature Extraction
-       ↓
- ┌──────────────┐
- │ LSTM Network │
- └──────────────┘
-         +
- ┌──────────────┐
- │ RandomForest │
- └──────────────┘
-       ↓
- Hybrid Ensemble
-       ↓
- Anomaly Detection
-       ↓
- Alerting System
-       ↓
- Streamlit Dashboard
-```
+* Hybrid LSTM + Random Forest detection pipeline
+* Real-time traffic monitoring dashboard
+* PCAP traffic analysis and feature extraction
+* Streamlit-based visualization interface
+* Ensemble anomaly scoring system
+* Network traffic simulation and evaluation tools
 
 ## Tech Stack
 
-### Core
-- Python
-- NumPy
-- Pandas
-
-### Machine Learning
-- TensorFlow / Keras
-- Scikit-learn
-
-### Networking
-- Scapy
-
-### Visualization
-- Streamlit
-- Matplotlib
-
-## Dataset
-
-The system was trained and evaluated using the UNSW-NB15 dataset, which contains modern network traffic patterns and multiple categories of malicious activity including DoS, Exploits, Reconnaissance, Shellcode, and Worms attacks.
-
-Extracted features included:
-- Packet length
-- Flow duration
-- Protocol type
-- TCP flags
-- Traffic frequency
-- Source and destination statistics
-- Packet timing information
+* Python
+* TensorFlow / Keras
+* Scikit-learn
+* Scapy
+* Pandas / NumPy
+* Streamlit
 
 ## Experimental Results
 
-| Metric | Score |
-|---|---|
-| Accuracy | 99.20% |
-| Precision | 93.7% |
-| Recall | 93.1% |
-| F1 Score | 93.4% |
+| Metric    | Score  |
+| --------- | ------ |
+| Accuracy  | 99.20% |
+| Precision | 93.7%  |
+| Recall    | 93.1%  |
+| F1 Score  | 93.4%  |
 
 ## Dashboard Preview
 
-### Traffic Analysis Dashboard
+### Traffic Analysis
 
 ![Dashboard](./docs/screenshots/dashboard-overview.png)
-
-### Detection Results
-
-![Results](./docs/screenshots/analysis-results.png)
 
 ### Model Evaluation
 
 ![Metrics](./docs/screenshots/metrics-comparison.png)
 
-### Confusion Matrix
-
-![Confusion Matrix](./docs/screenshots/confusion-matrix.png)
-
 ## Documentation
 
-- [Research Summary](./docs/research-summary.md)
-- [System Architecture](./docs/architecture.md)
-
-## Project Structure
-
-```bash
-├── .streamlit/
-├── docs/
-│   ├── architecture.md
-│   ├── research-summary.md
-│   └── screenshots/
-├── scripts/
-│   ├── download_data.py
-│   ├── simulate_network_traffic.py
-│   └── simulate_user_behavior.py
-├── src/
-│   ├── models/
-│   ├── accuracy_evaluation.py
-│   ├── alerting.py
-│   ├── attack_logging.py
-│   ├── confusion_matrix_visual.py
-│   ├── detection_real_time.py
-│   ├── hybrid_model.py
-│   └── training/
-├── app.py
-├── requirements.txt
-└── README.md
-```
+* [Research Summary](./docs/research-summary.md)
+* [System Architecture](./docs/architecture.md)
 
 ## Running Locally
 
-Install dependencies:
-
 ```bash
 pip install -r requirements.txt
-```
-
-Start the dashboard:
-
-```bash
 streamlit run app.py
 ```
 
-Run network traffic simulation:
-
-```bash
-python scripts/simulate_network_traffic.py
-```
-
-## Future Improvements
-
-- Kafka-based traffic ingestion
-- GPU-accelerated inference
-- Kubernetes deployment
-- SIEM integration
-- Distributed packet processing
-- Real-time threat intelligence feeds
-
 ## Disclaimer
 
-This project was developed strictly for educational and research purposes.
+This project was developed for educational and research purposes.

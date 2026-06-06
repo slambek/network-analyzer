@@ -92,20 +92,6 @@ Extracted features included:
 | Recall | 95.1% |
 | F1 Score | 95.0% |
 
-## Dashboard Preview
-
-Add screenshots of:
-- Real-time monitoring dashboard
-- Traffic visualization
-- Confusion matrix
-- Anomaly detection results
-
-Example:
-
-```markdown
-![Dashboard](./assets/dashboard.png)
-```
-
 ## Project Structure
 
 ```bash

@@ -105,10 +105,19 @@ Extracted features included:
 | Recall | 93.1% |
 | F1 Score | 93.4% |
 
+## Documentation
+
+- [Research Summary](./docs/research-summary.md)
+- [System Architecture](./docs/architecture.md)
+
 ## Project Structure
 
 ```bash
 ├── .streamlit/
+├── docs/
+│   ├── architecture.md
+│   ├── research-summary.md
+│   └── screenshots/
 ├── scripts/
 │   ├── download_data.py
 │   ├── simulate_network_traffic.py

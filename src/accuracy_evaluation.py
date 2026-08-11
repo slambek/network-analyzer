@@ -5,36 +5,49 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_curve, auc
 
-# 🔹 Загрузка модели
+# Load the trained model
 rf_model = joblib.load("rf_model_fixed.pkl")
 
-# 🔹 Загрузка данных
+# Load processed dataset
 data = pd.read_csv("../data/processed/train_processed.csv")
 
-# 🔹 Выбираем признаки (должны совпадать с теми, что использовались при обучении)
+# Select the features used during training
 features = ['duration', 'src_bytes', 'dst_bytes', 'wrong_fragment']
 X = data[features]
 y = data['binary_label']
 
-# 🔹 Разделение данных на train/test
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+# Split the dataset into training and test subsets
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
 
-# 🔹 Предсказание модели
+# Generate predictions
 y_pred = rf_model.predict(X_test)
 
-# 🔹 Вывод метрик
-print("✅ Accuracy:", accuracy_score(y_test, y_pred))
+# Evaluate model performance
+print("Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 
-# 🔹 Визуализация Confusion Matrix
+# Plot the confusion matrix
 plt.figure(figsize=(6, 4))
-sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', cmap='Blues', xticklabels=['Normal', 'Attack'], yticklabels=['Normal', 'Attack'])
+sns.heatmap(
+    confusion_matrix(y_test, y_pred),
+    annot=True,
+    fmt='d',
+    cmap='Blues',
+    xticklabels=['Normal', 'Attack'],
+    yticklabels=['Normal', 'Attack']
+)
 plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix')
 plt.show()
 
-# 🔹 Визуализация ROC-кривой
+# Plot the ROC curve
 y_probs = rf_model.predict_proba(X_test)[:, 1]
 fpr, tpr, _ = roc_curve(y_test, y_probs)
 roc_auc = auc(fpr, tpr)

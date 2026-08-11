@@ -17,7 +17,12 @@ logger = logging.getLogger(__name__)
 
 
 class ModelTrainer:
-    def __init__(self, data_dir='/media/weiss/Other/MDIR_USR/Scripts/Disser/system/data', processed_dir='/media/weiss/Other/MDIR_USR/Scripts/Disser/system/data/processed', models_dir='models'):
+    def __init__(
+        self,
+        data_dir='/media/weiss/Other/MDIR_USR/Scripts/Disser/system/data',
+        processed_dir='/media/weiss/Other/MDIR_USR/Scripts/Disser/system/data/processed',
+        models_dir='models'
+    ):
         self.data_dir = Path(data_dir)
         self.processed_dir = Path(processed_dir)
         self.models_dir = Path(models_dir)
@@ -27,41 +32,57 @@ class ModelTrainer:
             n_estimators=100,
             max_depth=20,
             random_state=42,
-            n_jobs=-1,  # Use all CPU cores
-            verbose=1  # Show training progress
+            n_jobs=-1,  # Use all available CPU cores
+            verbose=1   # Display training progress
         )
-        self.preprocessor = DataPreprocessor(data_dir=self.data_dir, processed_dir=self.processed_dir)
+
+        self.preprocessor = DataPreprocessor(
+            data_dir=self.data_dir,
+            processed_dir=self.processed_dir
+        )
         self.feature_extractor = FeatureExtractor()
 
     def train(self):
         logger.info("Starting supervised model training...")
 
-        # Get preprocessed training and testing data
+        # Load and preprocess the datasets
         logger.info("Loading and preprocessing datasets...")
         train_df, test_df = self.preprocessor.preprocess_all()
 
-        # Split features and target variable
+        # Separate features from the target variable
         X_train = train_df.drop('binary_label', axis=1)
         y_train = train_df['binary_label']
 
         X_test = test_df.drop('binary_label', axis=1)
         y_test = test_df['binary_label']
 
-        # Feature extraction
+        # Extract and scale numerical features
         logger.info("Extracting features...")
-        X_train_features = self.feature_extractor.extract_features(X_train, fit=True)
-        X_test_features = self.feature_extractor.extract_features(X_test, fit=False)
+        X_train_features = self.feature_extractor.extract_features(
+            X_train,
+            fit=True
+        )
+        X_test_features = self.feature_extractor.extract_features(
+            X_test,
+            fit=False
+        )
 
-        # Save feature names and scaler
+        # Save feature names and the fitted scaler
         feature_columns = X_train_features.columns.tolist()
-        joblib.dump(feature_columns, self.models_dir / 'feature_columns.pkl')
-        joblib.dump(self.feature_extractor.scaler, self.models_dir / 'scaler.pkl')
+        joblib.dump(
+            feature_columns,
+            self.models_dir / 'feature_columns.pkl'
+        )
+        joblib.dump(
+            self.feature_extractor.scaler,
+            self.models_dir / 'scaler.pkl'
+        )
 
-        # Train the model
+        # Train the Random Forest classifier
         logger.info("Training the RandomForestClassifier...")
         self.model.fit(X_train_features, y_train)
 
-        # Evaluate on training data
+        # Evaluate the model on the training set
         logger.info("Evaluating on training data...")
         y_train_pred = self.model.predict(X_train_features)
         train_accuracy = accuracy_score(y_train, y_train_pred)
@@ -73,7 +94,7 @@ class ModelTrainer:
         print("\nConfusion Matrix:")
         print(confusion_matrix(y_train, y_train_pred))
 
-        # Evaluate on test data
+        # Evaluate the model on the test set
         logger.info("Evaluating on test data...")
         y_test_pred = self.model.predict(X_test_features)
         test_accuracy = accuracy_score(y_test, y_test_pred)
@@ -85,7 +106,7 @@ class ModelTrainer:
         print("\nConfusion Matrix:")
         print(confusion_matrix(y_test, y_test_pred))
 
-        # Feature importance analysis
+        # Analyze feature importance
         feature_importance = pd.DataFrame({
             'feature': feature_columns,
             'importance': self.model.feature_importances_

@@ -1,22 +1,22 @@
 import pandas as pd
 import joblib
 
-# 🔹 Загрузка модели
+# Load the trained model
 rf_model = joblib.load("rf_model_fixed.pkl")
 
-# 🔹 Симуляция входящих данных (или получи их из сети)
+# Simulated incoming network data
 new_data = pd.DataFrame({
-    'duration': [5], 
-    'src_bytes': [1000], 
-    'dst_bytes': [2000], 
+    'duration': [5],
+    'src_bytes': [1000],
+    'dst_bytes': [2000],
     'wrong_fragment': [0]
 })
 
-# 🔹 Предсказание модели
+# Generate prediction
 prediction = rf_model.predict(new_data)
 
-# 🔹 Вывод результата
+# Display the result
 if prediction[0] == 1:
-    print("⚠️ Внимание! Обнаружена потенциальная атака!")
+    print("Warning: Potential attack detected!")
 else:
-    print("✅ Трафик нормальный.")
+    print("Traffic is normal.")

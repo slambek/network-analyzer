@@ -2,7 +2,7 @@
 
 ## Detection Pipeline
 
-```text id="ww1qhi"
+```text
 Network Traffic
        ↓
 Packet Capture & Parsing
@@ -14,36 +14,31 @@ Feature Extraction
  └──────────────┘
          +
  ┌──────────────┐
- │ RandomForest │
+ │ Random Forest│
  └──────────────┘
        ↓
  Hybrid Ensemble
        ↓
  Anomaly Detection
        ↓
- Alerting System
+ Alerting
        ↓
  Streamlit Dashboard
 ```
 
-## Core Components
+## Components
 
-### Traffic Processing
+**Traffic Processing**
+Packet parsing, protocol analysis, and feature extraction from network traffic.
 
-Responsible for packet parsing, protocol analysis, and traffic feature extraction from PCAP data.
+**LSTM**
+Models temporal dependencies in sequential traffic patterns.
 
-### LSTM Model
+**Random Forest**
+Classifies traffic based on extracted statistical features.
 
-Processes sequential traffic behavior and temporal packet patterns.
+**Hybrid Ensemble**
+Combines predictions from both models for anomaly classification.
 
-### Random Forest Model
-
-Performs statistical classification using extracted traffic features.
-
-### Hybrid Ensemble
-
-Combines outputs from both models to improve detection stability and reduce false positives.
-
-### Monitoring Dashboard
-
-Provides real-time traffic visualization, anomaly monitoring, and alerting through Streamlit.
+**Dashboard**
+Provides real-time visualization of traffic, anomalies, and alerts.
